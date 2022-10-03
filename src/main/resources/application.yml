@@ -1,0 +1,136 @@
+server:
+    port: 5022
+
+#-- Korporate -------------------------------------------------------------------------
+ambiente: DEV
+tmpDir: /tmp/storm
+
+api:
+    path: /api/v1
+    login: ${api.path}/tokens
+    public: ${api.path}/user/senha
+    header:
+        emissor: X-Emissor
+
+webhook:
+    path: /webhook
+
+persistence:
+    pageSize: 50
+    maxPageSize: 1000
+    url: 'jdbc:postgresql://localhost:5432/wing_troca_produto_svc'
+    user: postgres
+    pass: postgres
+    multitenant: true
+
+jwt:
+    key: 7kZBtOTXzwhYW8Emp5pfPUExG1GZKPu6
+    expiration:
+        mode: TIME # DAILY ou TIME
+        time: 0
+
+logstash:
+    enabled: false
+    host: '${WING_TROCA_PRODUTO_LOG_HOST:localhost}'
+    port: '${WING_TROCA_PRODUTO_LOG_PORT:5044}'
+    queue-size: 512
+#--------------------------------------------------------------------------------------
+
+# SpringDoc
+springdoc:
+    swagger-ui:
+        path: "/swagger-ui"
+        enabled: true
+        defaultModelsExpandDepth: -1
+        doc-expansion: none
+        tagsSorter: alpha
+        operationsSorter: method
+
+# log
+logging:
+    level:
+        ROOT: INFO
+#        com.korporate.wing.trocaProduto: INFO
+        org:
+            hibernate:
+                SQL: INFO
+
+# Spring + Database
+spring:
+    application:
+        name: wing-troca-produto
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari:
+            auto-commit: false
+            connectionTimeout: 20000
+            idleTimeout: 30000
+            leakDetectionThreshold: 5000
+            maxLifetime: 2000000
+            maximumPoolSize: 15
+            minimumIdle: 8
+            poolName: SpringBootJPAHikariCP
+        url: ${persistence.url}
+        username: ${persistence.user}
+        password: ${persistence.pass}
+    jpa:
+        database: POSTGRESQL
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: false
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.connection.provider_disables_autocommit: true
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            hibernate.temp.use_jdbc_metadata_defaults: false
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: none
+        generate-ddl: false
+
+    #Flyway
+    flyway:
+        enabled: true
+        locations: classpath:flyway/migration
+        #        check-location: true
+        url: ${persistence.url}
+        user: ${persistence.user}
+        password: ${persistence.pass}
+        schemas: nalin
+
+    jackson:
+        serialization:
+            write-dates-as-timestamps: false
+        time-zone: America/Recife
+
+# Eureka
+eureka:
+    client:
+        enabled: true
+        serviceUrl:
+            defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+    instance:
+        preferIpAddress: true
+
+# recaptcha
+recaptcha:
+    verifyURL:
+    secret:
+
+aws:
+    accessKey:
+    secretKey:
+    region: us-east-1
+    sqs:
+        threadPoolSize:
+        trocaProdutoProcessamentoUrl:
+        trocaProdutoConclusaoUrl:
+    s3:
+        bucket:
+
+feign:
+    storm: STORM-API
+    api-path: /api/v1
+    token:

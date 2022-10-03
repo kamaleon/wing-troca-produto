@@ -1,0 +1,31 @@
+# Spring Data
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: none
+        generate-ddl: false
+    # Flyway
+    flyway:
+        enabled: true
+
+# AWS
+aws:
+    accessKey: dev
+    secretKey: dev
+    region: us-east-1
+    sqs:
+        threadPoolSize: 10
+        trocaProdutoProcessamentoUrl: "http://localhost:4566/000000000000/wing_troca_produto_processamento.fifo"
+        trocaProdutoConclusaoUrl: "http://localhost:4566/000000000000/wing_troca_produto_conclusao.fifo"
+    s3:
+        bucket: storm
+
+feign:
+    token: "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDg4NjE1MTIsInZlcnNpb24iOjAsInR5cGUiOiJST0xFX09OTFkiLCJyb2xlcyI6WyJST0xFX1BBUkFNRVRST19BTFRFUkFSIiwiUk9MRV9QQVJBTUVUUk9fTElTVEFSIiwiUk9MRV9QUk9GSUxFX0xJU1RBUiIsIlJPTEVfUFJPRklMRV9DQURBU1RSQVIiLCJST0xFX1BST0ZJTEVfVklTVUFMSVpBUiIsIlJPTEVfUFJPRklMRV9BTFRFUkFSIl19.sHVZJ3cnNufx6i8NAPEKDQtVTQ64v7faoSpGCb498kk"
+
+
+# Debug
+wing:
+    logging:
+        logstash:
+            enabled: true
