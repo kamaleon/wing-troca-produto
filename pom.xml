@@ -26,7 +26,7 @@
         <dependency>
             <groupId>br.com.korporate</groupId>
             <artifactId>korporate-spring</artifactId>
-            <version>0.3.6</version>
+            <version>0.4.1</version>
         </dependency>
 
         <!-- Spring Cloud Eureka Client-->
