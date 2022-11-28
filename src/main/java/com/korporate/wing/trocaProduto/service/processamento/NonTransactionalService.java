@@ -142,7 +142,7 @@ public class NonTransactionalService
     public void concluirProcessamentoSolicitacao(UUID solicitacaoId) {
         List<Processamento> processamentos = processamentoService.getLinhasProcessadas(solicitacaoId);
 
-        File arquivoResultado = new File(System.getProperty("java.io.tmpdir") + File.separator + "RESULT_" + solicitacaoId);
+        File arquivoResultado = new File(System.getProperty("java.io.tmpdir") + File.separator + TenantContext.getTenant() + "_RESULT_" + solicitacaoId + ".csv");
 
         CSVWriter writer;
         try {
@@ -170,6 +170,6 @@ public class NonTransactionalService
             e.printStackTrace();
         }
 
-        s3Service.upload(arquivoResultado, TenantContext.getTenant(), solicitacaoId);
+        s3Service.upload(arquivoResultado);
     }
 }
