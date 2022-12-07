@@ -70,10 +70,6 @@ public class FlywayMigration implements FlywayMigrationStrategy
             while (rs.next())
                 tenantList.add(rs.getString(1));
 
-            // se não tiver nada significa que é um banco limpo, então vamos rodar os scripts no schema public
-            if (tenantList.size() == 0)
-                tenantList.add("public");
-
         }
         catch (SQLException e)
         {

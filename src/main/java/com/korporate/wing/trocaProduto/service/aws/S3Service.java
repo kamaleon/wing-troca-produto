@@ -19,13 +19,12 @@ public class S3Service
     @Autowired
     private KorporateS3 korporateS3;
 
-    public String upload(File file, String tenant, UUID solicitacaoId) {
+    public String upload(File file) {
         // envia pro S3
-        String nomeArquivo = tenant + "#" + solicitacaoId;
-        korporateS3.upload(bucket, nomeArquivo, file);
+        korporateS3.upload(bucket, file.getName(), file);
 
         // url do arquivo
-        return getS3FileUrl(nomeArquivo);
+        return getS3FileUrl(file.getName());
     }
 
     public String getS3FileUrl (String s3Object)
