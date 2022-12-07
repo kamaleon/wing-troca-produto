@@ -31,8 +31,8 @@ jwt:
 
 logstash:
     enabled: false
-    host: '${WING_TROCA_PRODUTO_LOG_HOST:localhost}'
-    port: '${WING_TROCA_PRODUTO_LOG_PORT:5044}'
+    host: '${STORM_LOG_HOST:localhost}'
+    port: '${STORM_LOG_PORT:5044}'
     queue-size: 512
 #--------------------------------------------------------------------------------------
 
