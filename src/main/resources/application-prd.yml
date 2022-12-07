@@ -1,0 +1,5 @@
+# Korporate
+ambiente: PRODUCAO
+
+logstash:
+    enabled: true
