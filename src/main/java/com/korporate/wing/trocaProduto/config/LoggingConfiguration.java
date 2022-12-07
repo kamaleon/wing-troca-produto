@@ -65,7 +65,9 @@ public class LoggingConfiguration {
             addContextListener(context);
             setMetricsMarkerLogbackFilter(context);
         }
-        addConsoleAppender(context);
+
+        // addConsoleAppender(context);
+
         addFileAppender(context, "/tmp/wing-troca-produto-error.log");
     }
 
@@ -83,7 +85,7 @@ public class LoggingConfiguration {
         fileAppender.start();
     }
 
-    private void addConsoleAppender(LoggerContext context) {
+    /*private void addConsoleAppender(LoggerContext context) {
         log.info("Initializing logging");
         // Wrap the appender in an Async appender for performance
         AsyncAppender appender = new AsyncAppender();
@@ -91,7 +93,7 @@ public class LoggingConfiguration {
         appender.setName(ASYNC_CONSOLE_APPENDER_NAME);
         appender.start();
 
-    }
+    }*/
 
     private void addContextListener(LoggerContext context) {
         LogbackLoggerContextListener loggerContextListener = new LogbackLoggerContextListener();
